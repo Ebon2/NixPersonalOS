@@ -1,0 +1,40 @@
+# Patch para VirtualBox 7.2.6 con kernel Linux 6.19
+#
+# El kernel 6.19 movió los símbolos cr4_update_irqsoff, cr4_read_shadow
+# y __flush_tlb_all al namespace privado module:kvm,kvm-amd,kvm-intel
+# (commit 6276c67f2bc4 de Sean Christopherson).
+#
+# Este patch añade MODULE_IMPORT_NS() en el código fuente de vboxdrv
+# para declarar explícitamente que necesita esos símbolos del namespace KVM.
+#
+# Fuente original: https://github.com/rpmfusion/VirtualBox-kmod/blob/master/kernel-6.19.patch
+# Reportado en:   https://github.com/VirtualBox/virtualbox/issues/467
+#                 https://github.com/NixOS/nixpkgs/issues/491434
+
+--- a/src/VBox/HostDrivers/Support/linux/SUPDrv-linux.c
++++ b/src/VBox/HostDrivers/Support/linux/SUPDrv-linux.c
+@@ -1,6 +1,7 @@
+ /* $Id: SUPDrv-linux.c $ */
+ /** @file
+  * VirtualBox Support Driver - Linux specifics.
++ * MODULE_IMPORT_NS for kernel 6.19 KVM symbol namespace.
+  */
+ 
+ /*
+@@ -103,6 +103,15 @@ static struct file_operations        g_FileOpsVBoxDrv = {
+     .unlocked_ioctl     = VBoxDrvLinuxIOCtl,
+ };
+ 
++#if RTLNX_VER_MIN(6,19,0)
++/* Kernel 6.19 restricts these symbols to KVM namespace (commit 6276c67).
++   VBoxDrv needs them for CR4/TLB operations on x86. */
++# if defined(CONFIG_KVM) || defined(CONFIG_KVM_MODULE)
++MODULE_IMPORT_NS("module:kvm");
++MODULE_IMPORT_NS("module:kvm-amd");
++MODULE_IMPORT_NS("module:kvm-intel");
++# endif
++#endif
++
+ /** The file_operations for the VBoxDrvU device node. */
+ static struct file_operations        g_FileOpsVBoxDrvU = {
+     .owner              = THIS_MODULE,
