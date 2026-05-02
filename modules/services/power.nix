@@ -32,12 +32,12 @@
   };
 
   # Brightness control (para laptops)
-  # programs.light.enable = true;  # Para control de brillo sin sudo
+  programs.light.enable = true;  # Para control de brillo sin sudo
 
   # Paquetes de power management
   environment.systemPackages = with pkgs; [
     powertop      # Power consumption monitor
     acpi          # Battery info
-    # ryzenadj-git  # AMD Ryzen power control (si tienes Ryzen)
+    ryzenadj-git  # AMD Ryzen power control (si tienes Ryzen)
   ];
 }

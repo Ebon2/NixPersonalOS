@@ -1,0 +1,97 @@
+{ pkgs, ... }:
+
+# ─────────────────────────────────────────────────────────────────
+# Paquetes del usuario — instalados en ~/.nix-profile
+# Aquí va todo lo que era environment.systemPackages pero pertenece
+# al usuario, no al sistema.
+# ─────────────────────────────────────────────────────────────────
+{
+  home.packages = with pkgs; [
+
+    # ── Herramientas básicas ────────────────────────────────────
+    wget curl jq tree rsync pv
+    unzip unrar zip p7zip
+
+    # ── Monitoring / System info ────────────────────────────────
+    pciutils usbutils lshw inxi hwinfo dmidecode lsscsi smartmontools
+    htop btop
+    fastfetch
+
+    # ── AMD GPU ─────────────────────────────────────────────────
+    amdgpu_top
+    mesa-demos     # glxinfo, glxgears
+    vulkan-tools   # vulkaninfo
+
+    # ── Red ──────────────────────────────────────────────────────
+    networkmanagerapplet
+    bind dnsmasq iperf3 nethogs ethtool inetutils
+
+    # ── Terminal / Shell ─────────────────────────────────────────
+    starship
+    atuin
+    tldr
+    tmux
+    # kitty → configurado en programs/kitty.nix
+    # fish  → configurado en programs/fish.nix
+
+    # ── Gestores de archivos ─────────────────────────────────────
+    ranger
+    broot
+    duf
+
+    # ── Desarrollo ───────────────────────────────────────────────
+    jdk21
+    docker-compose
+    jetbrains-toolbox
+    vscode
+    # IDE → descomenta los que uses:
+    jetbrains.idea
+    # jetbrains.idea-community
+    jetbrains.clion
+    jetbrains.pycharm
+    bruno            # API client
+
+    # ── Multimedia ───────────────────────────────────────────────
+    vlc
+    ffmpeg
+    cava
+    pavucontrol
+    steam-run
+    brightnessctl
+
+    # ── Productividad ────────────────────────────────────────────
+    onlyoffice-desktopeditors
+    obsidian
+    zotero
+
+    # ── Gráficos ─────────────────────────────────────────────────
+    gimp
+
+    # ── Comunicación ─────────────────────────────────────────────
+    discord
+    zapzap          # WhatsApp
+    spotify
+
+    # ── Gaming ───────────────────────────────────────────────────
+    mangohud
+    prismlauncher   # Minecraft
+
+    # ── Navegadores ──────────────────────────────────────────────
+    brave
+    # firefox → configurado en programs/firefox.nix
+
+    # ── Utilidades ───────────────────────────────────────────────
+    bitwarden-desktop
+    obs-studio
+    timeshift
+    bubblewrap
+
+    # ── Extras / Fun ─────────────────────────────────────────────
+    cmatrix
+    figlet
+    clock-rs
+
+    # ── KDE (si usas Plasma) ─────────────────────────────────────
+    kdePackages.kate
+  ];
+}

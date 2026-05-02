@@ -31,11 +31,11 @@
   # networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
 
   # Habilitar SSH (descomenta si lo necesitas)
-  # services.openssh = {
-  #   enable = true;
-  #   settings = {
-  #     PasswordAuthentication = false;  # Solo con llaves
-  #     PermitRootLogin = "no";
-  #   };
-  # };
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;  # Solo con llaves
+      PermitRootLogin = "no";
+    };
+  };
 }
