@@ -37,16 +37,54 @@
   # ── Starship (prompt — alternativa al prompt custom de fish) ───
   # Descomenta si prefieres starship en vez del prompt manual de fish.nix
   programs.starship = {
-    enable                = true;
-    enableFishIntegration = true;
+    enable = true;
+
     settings = {
       add_newline = false;
+
+      format = "$directory$git_branch$git_status$nodejs$python$rust\n$character";
+      
       character = {
-        success_symbol = "[❯](bold green)";
-        error_symbol   = "[❯](bold red)";
+        success_symbol = "[➜](bold green)";
+        error_symbol = "[✗](bold red)";
+      };
+
+      directory = {
+        style = "cyan bold";
+        truncation_length = 3;
+        truncate_to_repo = true;
+      };
+
+      git_branch = {
+        symbol = " ";
+        style = "magenta bold";
+      };
+
+      git_status = {
+        style = "red";
+        conflicted = "💥";
+        modified = "";
+        staged = "✓";
+        untracked = "?";
+      };
+
+      nodejs = {
+        symbol = "⬢ ";
+        style = "green";
+      };
+
+      python = {
+        symbol = "🐍 ";
+        style = "yellow";
+      };
+
+      rust = {
+        symbol = "🦀 ";
+        style = "orange";
       };
     };
   };
+
 
   # ── Ranger ─────────────────────────────────────────────────────
   # Los configs de static/ranger/ se enlazan directamente

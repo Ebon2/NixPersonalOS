@@ -118,7 +118,7 @@
     "hypr/hyprpaper.conf".source = ../../static/hypr/hyprpaper.conf;
     "hypr/hyprlock.conf".source  = ../../static/hypr/hyprlock.conf;
     "hypr/hypridle.conf".source  = ../../static/hypr/hypridle.conf;
-    "hypr/wp.png".source         = ../../static/hypr/wp.png;
+    #"hypr/wp.png".source         = ../../static/hypr/wp.png;
     "hypr/wp.jpg".source         = ../../static/hypr/wp.jpg;
   };
 }

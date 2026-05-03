@@ -12,12 +12,12 @@
   # VirtualBox 7.2.6 no compila contra 6.19 sin el patch de
   # virtualbox.nix (ver modules/services/virtualbox.nix).
   # Si el patch inline falla, usa el fallback de abajo.
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  # boot.kernelPackages = pkgs.linuxPackages_zen;
 
   # ===== FALLBACK: Zen 6.12 (última rama estable compatible con VBox) =====
   # Si el patch de 6.19 da problemas, comenta la línea de arriba
   # y descomenta esta:
-  # boot.kernelPackages = pkgs.linuxPackages_6_12;
+   boot.kernelPackages = pkgs.linuxPackages_6_12;
 
   # Otros kernels disponibles:
   # pkgs.linuxPackages_latest     # Última versión estable

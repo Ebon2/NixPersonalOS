@@ -67,9 +67,6 @@
   # ── Steam (opcional) ───────────────────────────────────────────
   programs.steam = {
     enable = true;
-    package = pkgs.steam.override {
-      extraCompatPackages = with pkgs; [ proton-ge-bin ];
-    };
     remotePlay.openFirewall = true;
   };
 }

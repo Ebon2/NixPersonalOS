@@ -38,6 +38,6 @@
   environment.systemPackages = with pkgs; [
     powertop      # Power consumption monitor
     acpi          # Battery info
-    ryzenadj-git  # AMD Ryzen power control (si tienes Ryzen)
+    ryzenadj  # AMD Ryzen power control (si tienes Ryzen)
   ];
 }
