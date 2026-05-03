@@ -32,7 +32,7 @@
   };
 
   # Brightness control (para laptops)
-  programs.light.enable = true;  # Para control de brillo sin sudo
+  # programs.light.enable = true;  # Para control de brillo sin sudo
 
   # Paquetes de power management
   environment.systemPackages = with pkgs; [

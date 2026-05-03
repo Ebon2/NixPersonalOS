@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 # ─────────────────────────────────────────────────────────────────
 # HOME MANAGER — Punto de entrada para el usuario "angel"
@@ -57,7 +57,7 @@
     XDG_CACHE_HOME  = "$HOME/.cache";
 
     # Qt
-    QT_QPA_PLATFORMTHEME = "qt6ct";
+    QT_QPA_PLATFORMTHEME = lib.mkForce "qt6ct";
     QT_WAYLAND_RECONNECT = "1";
 
     # Wayland / Electron

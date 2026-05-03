@@ -1,0 +1,80 @@
+* {
+    background-color:      transparent;
+    text-color:           #ffffff;
+    font:                 "JetBrainsMono Nerd Font 12";
+}
+
+window {
+    transparency:         "real";
+    background-color:     rgba(0, 0, 0, 0.85);
+    border-radius:        12px;
+    border:               2px;
+    border-color:         #89b4fa;
+    width:                600px;
+    padding:              20px;
+}
+
+mainbox {
+    border:               0;
+    padding:              0;
+}
+
+inputbar {
+    children:             [ prompt, textbox-prompt-colon, entry ];
+    padding:              10px;
+    border-radius:        8px;
+    background-color:     rgba(255, 255, 255, 0.1);
+}
+
+prompt {
+    enabled:              true;
+    padding:              0 10px 0 0;
+    text-color:           #89b4fa;
+}
+
+textbox-prompt-colon {
+    expand:               false;
+    str:                  ":";
+    text-color:           #89b4fa;
+}
+
+entry {
+    placeholder:          "Buscar aplicación...";
+    placeholder-color:    rgba(255, 255, 255, 0.5);
+}
+
+listview {
+    columns:              1;
+    lines:                8;
+    cycle:                false;
+    dynamic:              true;
+    scrollbar:            false;
+    spacing:              5px;
+    padding:              10px 0 0 0;
+}
+
+element {
+    padding:              12px;
+    border-radius:        8px;
+}
+
+element-text {
+    background-color:     inherit;
+    text-color:           inherit;
+}
+
+element.normal.normal {
+    background-color:     transparent;
+    text-color:           #ffffff;
+}
+
+element.selected.normal {
+    background-color:     rgba(137, 180, 250, 0.3);
+    text-color:           #ffffff;
+    border:               1px;
+    border-color:         #89b4fa;
+}
+
+element.alternate.normal {
+    background-color:     transparent;
+}

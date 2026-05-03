@@ -1,0 +1,14 @@
+@import "~/.config/rofi/themes/catppuccin.rasi"
+
+configuration {
+    modi:                       "drun,run,window";
+    show-icons:                 true;
+    icon-theme:                 "Papirus-Dark";
+    display-drun:               " Apps";
+    display-run:                " Run";
+    display-window:             " Window";
+    drun-display-format:        "{name}";
+    window-format:              "{w} · {c} · {t}";
+    font:                       "JetBrainsMono Nerd Font 11";
+    
+}

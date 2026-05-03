@@ -1,5 +1,3 @@
-{ config, pkgs, ... }:
-
 # ─────────────────────────────────────────────────────────────────
 # PAQUETES A NIVEL SISTEMA
 # Solo van aquí cosas que realmente necesitan ser sistema:

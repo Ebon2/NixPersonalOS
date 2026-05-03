@@ -1,0 +1,36 @@
+// Waybar — config
+// Catppuccin Mocha • NixOS edition
+{
+    "layer": "top",
+    "position": "top",
+    "margin-top": 8,
+    "margin-left": 8,
+    "margin-right": 16,
+    "margin-bottom": 0,
+    "spacing": 4,
+    "height": 40,
+    "exclusive": true,
+
+    "include": ["~/.config/waybar/modules.jsonc"],
+
+    "modules-left": [
+        "custom/nixos",
+        "hyprland/workspaces",
+        "hyprland/window"
+    ],
+
+    "modules-center": [
+        "clock"
+    ],
+
+    "modules-right": [
+//        "custom/lock",
+        "pulseaudio",
+        "battery",
+        "hyprland/language",
+        "group/hardware",
+        "custom/cliphist",
+        "tray",
+        "custom/exit"
+    ]
+}

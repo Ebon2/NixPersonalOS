@@ -3,7 +3,7 @@
 {
   imports = [
     # Sistema
-    #../../modules/system/boot.nix
+    ../../modules/system/boot.nix
     ../../modules/system/kernel.nix
     ../../modules/system/locale.nix
     ../../modules/system/networking.nix
