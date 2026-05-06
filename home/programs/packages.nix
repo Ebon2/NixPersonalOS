@@ -9,7 +9,7 @@
   home.packages = with pkgs; [
 
     # ── Herramientas básicas ────────────────────────────────────
-    wget curl jq tree rsync pv
+    wget curl jq tree rsync pv bat
     unzip unrar zip p7zip
 
     # ── Monitoring / System info ────────────────────────────────
@@ -90,6 +90,7 @@
     cmatrix
     figlet
     clock-rs
+    home-manager
 
     # ── KDE (si usas Plasma) ─────────────────────────────────────
     kdePackages.kate

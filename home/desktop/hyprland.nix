@@ -44,7 +44,6 @@
         "wl-paste --watch cliphist store"
         "awww-daemon"
         "sleep 1.5 && awww img ~/.config/hypr/wp.png --transition-type grow --transition-pos 0.5,0.5 --transition-duration 2 --transition-fps 60"
-        "~/.config/waybar/launch.sh"
         "nm-applet --indicator"
         "blueman-applet"
         "hyprctl setcursor Qogir-dark 24"

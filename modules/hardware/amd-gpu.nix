@@ -21,6 +21,7 @@
     
     # Para aplicaciones de 32 bits (gaming)
     extraPackages32 = with pkgs.pkgsi686Linux; [
+      mesa
       vulkan-validation-layers
     ];
   };
@@ -33,7 +34,7 @@
 #  environment.variables.AMD_VULKAN_ICD = "RADV";
   
   # Opción 2: RADV (driver Mesa - recomendado para gaming)
-   environment.variables.VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
+  #environment.variables.VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
 
   # Variables de entorno para AMD
   environment.sessionVariables = {
