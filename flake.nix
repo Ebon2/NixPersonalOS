@@ -26,9 +26,10 @@
           home-manager.nixosModules.home-manager
           {
             home-manager = {
+              backupFileExtension = "bak-$(date +%Y%m%d%H%M%S)";
               useGlobalPkgs = true;   # Usa el mismo nixpkgs del sistema
               useUserPackages = true; # Instala paquetes en /etc/profiles/per-user
-              backupFileExtension = "bak"; # En vez de fallar, renombra conflictos
+              #backupFileExtension = "bak"; # En vez de fallar, renombra conflictos
               extraSpecialArgs = { inherit inputs; };
               users.angel = import ./home/default.nix;
             };

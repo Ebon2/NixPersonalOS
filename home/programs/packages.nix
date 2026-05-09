@@ -10,11 +10,11 @@
 
     # ── Herramientas básicas ────────────────────────────────────
     wget curl jq tree rsync pv bat
-    unzip unrar zip p7zip
+    unzip unrar zip p7zip openssl
 
     # ── Monitoring / System info ────────────────────────────────
     pciutils usbutils lshw inxi hwinfo dmidecode lsscsi smartmontools
-    htop btop
+    htop btop ntopng
     fastfetch
 
     # ── AMD GPU ─────────────────────────────────────────────────
@@ -35,7 +35,15 @@
     # fish  → configurado en programs/fish.nix
 
     # ── Gestores de archivos ─────────────────────────────────────
-    ranger
+    yazi
+    ffmpeg
+    unar
+    poppler
+    fd
+    ripgrep
+    fzf
+    zoxide
+    thunar
     broot
     duf
 
@@ -63,6 +71,7 @@
     onlyoffice-desktopeditors
     obsidian
     zotero
+    pgmodeler
 
     # ── Gráficos ─────────────────────────────────────────────────
     gimp

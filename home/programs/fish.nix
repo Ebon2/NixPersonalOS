@@ -51,6 +51,7 @@
       cat   = "bat";
       grep  = "grep --color=auto";
       vim   = "nvim";
+      fm    = "Y";
     };
 
     # ── Funciones (migradas de static/fish/functions/) ───────────
@@ -168,6 +169,31 @@
           set -l src $argv[1]
           set -l out /tmp/(basename $src .c)
           gcc -O2 -o $out $src && $out $argv[2..-1]
+        '';
+      };
+
+      Y = {
+        body = ''
+          set tmp (mktemp -t "yazi-cwd.XXXXXX")
+
+          yazi $argv --cwd-file = "$tmp"
+
+          if test -f "$tmp"
+              set cwd (cat "$tmp")
+
+              if test -n "$cwd"; and test "$cwd" != "$PWD"
+                  cd "$cwd"
+              end
+          end
+
+          rm -f "$tmp"
+        '';
+      };
+      
+      mi_funcion = {
+        body = ''
+          echo "Hola desde fish"
+          $argv
         '';
       };
     };

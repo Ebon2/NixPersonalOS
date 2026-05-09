@@ -84,7 +84,7 @@ nixos_config/
 
 ### Rebuild completo (sistema + home manager)
 ```bash
-sudo nixos-rebuild switch --flake /etc/nixos#nixos
+sudo nixos-rebuild switch --flake ~/nixos_config#nixos
 ```
 
 > Home Manager se aplica automáticamente dentro del rebuild de NixOS.
@@ -92,13 +92,13 @@ sudo nixos-rebuild switch --flake /etc/nixos#nixos
 
 ### Solo aplicar cambios de Home Manager (sin tocar el sistema)
 ```bash
-home-manager switch --flake /etc/nixos#angel
+home-manager switch --flake  ~/nixos_config#angel
 ```
 Útil cuando solo cambiaste algo en `home/`. Más rápido que el rebuild completo.
 
 ### Test antes de aplicar (no activa el boot entry)
 ```bash
-sudo nixos-rebuild test --flake /etc/nixos#nixos
+sudo nixos-rebuild test --flake ~/nixos_config#nixos
 ```
 
 ### Ver generaciones del sistema
@@ -115,18 +115,18 @@ sudo nixos-rebuild switch --rollback
 ### Rollback de Home Manager
 ```bash
 home-manager generations        # lista generaciones HM
-home-manager switch --flake /etc/nixos#angel --generation <N>
+home-manager switch --flake ~/nixos_config#angel --generation <N>
 ```
 
 ### Actualizar flake.lock (actualiza todos los inputs)
 ```bash
-nix flake update /etc/nixos
-sudo nixos-rebuild switch --flake /etc/nixos#nixos
+nix flake update ~/nixos_config/
+sudo nixos-rebuild switch --flake ~/nixos_config#nixos
 ```
 
 ### Actualizar un solo input (ej: solo home-manager)
 ```bash
-nix flake update home-manager --flake /etc/nixos
+nix flake update home-manager --flake ~/nixos_config
 ```
 
 ### Garbage collection
@@ -150,9 +150,9 @@ home.packages = with pkgs; [
 
 Luego:
 ```bash
-sudo nixos-rebuild switch --flake /etc/nixos#nixos
+sudo nixos-rebuild switch --flake ~/nixos_config#nixos
 # o más rápido:
-home-manager switch --flake /etc/nixos#angel
+home-manager switch --flake ~/nixos_config#angel
 ```
 
 ---
@@ -354,7 +354,7 @@ Home Manager no puede crear un symlink porque el archivo ya existe:
 # El archivo está en home-manager.backupFileExtension = "bak"
 # así que lo renombrará automáticamente. Si sigue fallando:
 rm ~/.config/archivo-conflictivo
-home-manager switch --flake /etc/nixos#angel
+home-manager switch --flake ~/nixos_config#angel
 ```
 
 ### Verificar qué gestiona HM
