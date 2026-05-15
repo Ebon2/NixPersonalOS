@@ -47,6 +47,14 @@
     broot
     duf
 
+    # thunar
+    thunar
+    thunar-archive-plugin
+    thunar-media-tags-plugin
+    thunar-volman
+    
+    ffmpegthumbnailer
+    file-roller
     # ── Desarrollo ───────────────────────────────────────────────
     jdk21
     docker-compose

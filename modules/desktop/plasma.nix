@@ -39,7 +39,7 @@
   environment.systemPackages = with pkgs; [
     # Aplicaciones KDE
     kdePackages.kate
-    kdePackages.konsole
+    #kdePackages.konsole
     kdePackages.dolphin
     kdePackages.ark  # Gestor de archivos comprimidos
     kdePackages.okular  # Visor de PDFs
@@ -47,9 +47,9 @@
     kdePackages.spectacle  # Capturas de pantalla
     
     # Utilidades
-    kdePackages.kdeconnect-kde  # Integración con Android
+    #kdePackages.kdeconnect-kde  # Integración con Android
     kdePackages.partitionmanager  # Gestor de particiones
-    kdePackages.kcalc  # Calculadora
+    #kdePackages.kcalc  # Calculadora
     
     # Agrega más según necesites
 

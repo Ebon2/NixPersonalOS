@@ -176,7 +176,7 @@
         body = ''
           set tmp (mktemp -t "yazi-cwd.XXXXXX")
 
-          yazi $argv --cwd-file = "$tmp"
+          yazi $argv --cwd-file="$tmp"
 
           if test -f "$tmp"
               set cwd (cat "$tmp")

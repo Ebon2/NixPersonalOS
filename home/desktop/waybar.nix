@@ -13,7 +13,7 @@
 {
   programs.waybar = {
     enable = true;
-    systemd.enable = true;  # Activa si prefieres systemd user service
+    systemd.enable = false;  # Activa si prefieres systemd user service
 
     # OPCIÓN B — descomenta y borra el xdg.configFile de abajo:
     # style  = builtins.readFile ../../static/waybar/style.css;

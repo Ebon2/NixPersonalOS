@@ -29,7 +29,7 @@
     ./programs/kitty.nix
     ./programs/neovim.nix
     ./programs/git.nix
-    ./programs/thunar.nix
+    #./programs/thunar.nix
     ./programs/misc.nix
     ./desktop/hyprland.nix
     ./desktop/waybar.nix

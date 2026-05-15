@@ -48,6 +48,7 @@
         "blueman-applet"
         "hyprctl setcursor Qogir-dark 24"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "waybar"
       ];
 
       # ── Input ─────────────────────────────────────────────────
