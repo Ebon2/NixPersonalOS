@@ -1,15 +1,15 @@
 window {
     margin: 0px;
-    border: 2px solid #89b4fa;
+    border: 2px solid #00ff41;
     border-radius: 15px;
-    background-color: rgba(30, 30, 46, 0.9);
+    background-color: rgba(13, 15, 13, 0.92);
 }
 
 #input {
     margin: 10px;
     border: none;
-    color: #cdd6f4;
-    background-color: #1e1e2e;
+    color: #c8ffc8;
+    background-color: #0d0f0d;
     border-radius: 10px;
 }
 
@@ -34,10 +34,10 @@ window {
     padding: 15px;
     margin: 5px;
     border-radius: 10px;
-    color: #cdd6f4;
+    color: #c8ffc8;
 }
 
 #entry:selected {
-    background-color: #89b4fa;
-    color: #1e1e2e;
+    background-color: #00ff41;
+    color: #000000;
 }

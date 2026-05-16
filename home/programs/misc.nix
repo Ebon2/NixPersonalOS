@@ -106,4 +106,5 @@
 
   # ── Waypaper ───────────────────────────────────────────────────
   xdg.configFile."waypaper/config.ini".source = ../../static/waypaper/config.ini;
+  xdg.configFile."cava/config".source = ../../static/cava/config;
 }

@@ -1,14 +1,14 @@
 * {
-    bg:                   #1e1e2e;
-    bg-alt:               #313244;
-    fg:                   #cdd6f4;
+    bg:                   #0d0f0d;
+    bg-alt:               #0f1f0f;
+    fg:                   #c8ffc8;
     
     red:                  #f38ba8;
-    green:                #a6e3a1;
+    green:                #39ff14;
     yellow:               #f9e2af;
     blue:                 #89b4fa;
     magenta:              #cba6f7;
-    cyan:                 #89dceb;
+    cyan:                 #00e676;
     
     background-color:     @bg;
     text-color:           @fg;
@@ -17,7 +17,7 @@
 
 window {
     transparency:         "real";
-    background-color:     rgba(30, 30, 46, 0.95);
+    background-color:     rgba(13, 15, 13, 0.95);
     border-radius:        15px;
     border:               3px;
     border-color:         @blue;

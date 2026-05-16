@@ -10,9 +10,9 @@
     enable = true;
 
     theme = {
-      name    = "catppuccin-mocha-blue-standard";
+      name = "catppuccin-mocha-green-standard";
       package = pkgs.catppuccin-gtk.override {
-        accents = [ "blue" ];
+        accents = [ "green" ];
         variant  = "mocha";
       };
     };

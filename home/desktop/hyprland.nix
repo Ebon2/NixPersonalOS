@@ -29,8 +29,8 @@
         gaps_in            = 5;
         gaps_out           = 10;
         border_size        = 2;
-        "col.active_border"   = "rgba(bd93f9ff) rgba(ff79c6ff) 45deg";
-        "col.inactive_border" = "rgba(44475aaa)";
+        "col.active_border"   = "rgba(00ff41ff) rgba(00cc33ff) 45deg";
+        "col.inactive_border" = "rgba(1a331aaa)";
         layout             = "dwindle";
       };
 
@@ -87,7 +87,7 @@
         "XCURSOR_SIZE,24"
         "HYPRCURSOR_THEME,Qogir-dark"
         "HYPRCURSOR_SIZE,24"
-        "GTK_THEME,catppuccin-mocha-blue-standard"
+        "GTK_THEME,catppuccin-mocha-green-standard"
       ];
     };
 
