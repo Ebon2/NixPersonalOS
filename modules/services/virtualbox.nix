@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ userConfig, config, pkgs, lib, ... }:
 
 # ===== VIRTUALBOX CON KERNEL ZEN (incluyendo 6.19) =====
 #
@@ -76,7 +76,7 @@ in
   };
 
   # Usuario con acceso a VMs
-  users.extraGroups.vboxusers.members = [ "angel" ];
+  users.extraGroups.vboxusers.members = [ userConfig.username ];
 
   # Regla udev para USB passthrough en VMs
   services.udev.extraRules = ''

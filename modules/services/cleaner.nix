@@ -1,6 +1,6 @@
-{ config, pkgs, lib, ... }:
+{ userConfig, config, pkgs, lib, ... }:
 let
-  user = "angel";
+  user = userConfig.username;
 in
 {
   systemd.services.cleanup-temp = {

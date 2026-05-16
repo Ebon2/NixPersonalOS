@@ -1,15 +1,13 @@
-{ config, pkgs, ... }:
+{ userConfig, config, pkgs, ... }:
 
 {
-  users.users.angel = {
+  users.users.${userConfig.username} = {
     isNormalUser = true;
-    description  = "username";
+    description  = userConfig.description;
     extraGroups  = [ "networkmanager" "wheel" "video" "audio" "docker" ];
     shell        = pkgs.fish;
-    # Home Manager gestiona los dotfiles; no se necesita packages aquí
-    # (úsalo solo para paquetes que dependan de privilegios del sistema)
+    hashedPassword = userConfig.hashedPassword;
   };
 
   # Genera la contraseña con: mkpasswd -m sha-512
-  users.users.angel.hashedPassword = "HASHED_PASSWORD_AQUI";
 }

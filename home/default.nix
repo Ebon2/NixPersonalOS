@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, lib, ... }:
+{ userConfig, config, pkgs, inputs, lib, ... }:
 
 # ─────────────────────────────────────────────────────────────────
 # HOME MANAGER — Punto de entrada para el usuario "angel"
@@ -38,7 +38,7 @@
   ];
 
   # ── Identidad ──────────────────────────────────────────────────
-  home.username = "angel";
+  home.username = userConfig.username;
   home.homeDirectory = "~";
 
   # ── Versión de Home Manager ────────────────────────────────────
