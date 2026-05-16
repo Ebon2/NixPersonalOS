@@ -8,6 +8,5 @@
     shell        = pkgs.fish;
     hashedPassword = userConfig.hashedPassword;
   };
-
   # Genera la contraseña con: mkpasswd -m sha-512
 }

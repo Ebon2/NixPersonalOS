@@ -39,7 +39,7 @@
 
   # ── Identidad ──────────────────────────────────────────────────
   home.username = userConfig.username;
-  home.homeDirectory = "~";
+  home.homeDirectory = "/home/${userConfig.username}";
 
   # ── Versión de Home Manager ────────────────────────────────────
   # NO cambiar después de la instalación inicial

@@ -4,7 +4,7 @@
   programs.git = {
     enable    = true;
     settings = {
-      user.name  = userConfig.name;
+      user.name  = userConfig.fullName;
       user.email = userConfig.email;
       init.defaultBranch = userConfig.gitDefaultBranch;
       pull.rebase        = false;

@@ -11,7 +11,7 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
-    userConfig = import "${builtins.getEnv "HOME"}/.config/nixos-secrets/user.nix";   # ← único punto de entrada
+    userConfig = import ./user.nix;   # ← único punto de entrada
   in {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
