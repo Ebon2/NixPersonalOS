@@ -16,10 +16,12 @@
 
 {
   programs.neovim = {
-    enable       = true;
+    enable        = true;
     defaultEditor = true;
-    viAlias      = true;
-    vimAlias     = true;
+    viAlias       = true;
+    vimAlias      = true;
+    withRuby      = false;
+    withPython3   = false;
 
     # Paquetes de sistema que neovim necesita (LSPs, formatters, etc.)
     extraPackages = with pkgs; [
