@@ -116,10 +116,11 @@
 
       # Rebuild NixOS
       Nix_Rebuild_System = {
-        body = ''
-          echo "Rebuilding NixOS..."
-          sudo nixos-rebuild switch --flake /etc/nixos#nixos $argv
-        '';
+        body = "sudo nixos-rebuild switch --flake ~/nixos_config#nixos";
+      };
+
+      Nix_Test_Configuration = {
+        body = "sudo nixos-rebuild test --flake ~/nixos_config#nixos --no-reexec";
       };
 
       # Ver generaciones
@@ -189,11 +190,14 @@
           rm -f "$tmp"
         '';
       };
-      
-      mi_funcion = {
-        body = ''
-          echo "Hola desde fish"
-          $argv
+
+      Cmatrix = {
+        body =  ''
+          kitty --title "Matrix" fish -c "
+              kitty @ set-background-opacity 1.0;
+              cmatrix;
+              kitty @ set-background-opacity 0.75
+          "
         '';
       };
     };

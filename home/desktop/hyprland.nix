@@ -49,6 +49,11 @@
         "hyprctl setcursor Qogir-dark 24"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "waybar"
+        "zapzap"
+        "spotify"
+        "kitty --class clock-term -e clock-rs -c green -s -t"
+        "sleep 3 && kitty --class cava-term -e cava"
+        "hyprctl dispatch workspace 2"
       ];
 
       # ── Input ─────────────────────────────────────────────────
