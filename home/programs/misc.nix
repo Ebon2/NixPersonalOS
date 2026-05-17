@@ -36,7 +36,7 @@
 
   # ── Starship (prompt — alternativa al prompt custom de fish) ───
   # Descomenta si prefieres starship en vez del prompt manual de fish.nix
-/*   programs.starship = {
+   programs.starship = {
     enable = true;
 
     settings = {
@@ -84,7 +84,7 @@
       };
     };
   };
- */
+
 
   # ── Ranger ─────────────────────────────────────────────────────
   # Los configs de static/ranger/ se enlazan directamente
