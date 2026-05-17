@@ -1,28 +1,58 @@
-{ pkgs, ... }:
-
-# ─────────────────────────────────────────────────────────────────
-# Fish Shell — gestionado por Home Manager
-#
-# Las funciones de static/fish/functions/ se migran aquí.
-# Home Manager genera ~/.config/fish/config.fish y las funciones
-# automáticamente — NO edites esos archivos a mano.
-# ─────────────────────────────────────────────────────────────────
-
+{ pkgs, userConfig, ... }:
 {
   programs.fish = {
     enable = true;
+
+    # ── PATH de usuario ─────────────────────────────────────────
+    # Antes estaba en fish_variables (universal) — ahora en shellInit
+    shellInit = ''
+      fish_add_path ~/.local/bin
+      fish_add_path ~/.local/share/JetBrains/Toolbox/scripts
+
+      set -gx DIRENV_LOG_FORMAT ""
+      set -gx DIRENV_LOG_LEVEL off
+
+      # ── Tema Matrix ─────────────────────────────────────────
+      set --global fish_color_normal        c8ffc8
+      set --global fish_color_command       00ff41
+      set --global fish_color_keyword       39ff14
+      set --global fish_color_quote         7abf7a
+      set --global fish_color_redirection   00cc33
+      set --global fish_color_end           00e676
+      set --global fish_color_error         ff3333
+      set --global fish_color_param         c8ffc8
+      set --global fish_color_comment       3d5c3d
+      set --global fish_color_operator      00ff41
+      set --global fish_color_escape        00ffcc
+      set --global fish_color_autosuggestion 1a331a
+      set --global fish_color_valid_path    --underline
+      set --global fish_color_search_match  --background=0f3a0f
+      set --global fish_color_selection     --background=0f3a0f
+      set --global fish_color_cancel        ff3333 --reverse
+      set --global fish_color_option        b8ff00
+      set --global fish_color_host          00ff41
+      set --global fish_color_user          39ff14
+      set --global fish_color_cwd           00cc33
+      set --global fish_color_status        ff3333
+      set --global fish_pager_color_prefix          00ff41
+      set --global fish_pager_color_completion      c8ffc8
+      set --global fish_pager_color_description     3d5c3d
+      set --global fish_pager_color_progress        3d5c3d
+      set --global fish_pager_color_selected_prefix 00ff41
+      set --global fish_pager_color_selected_completion c8ffc8
+      set --global fish_pager_color_selected_background --background=0f3a0f
+      set --global fish_pager_color_selected_description 7abf7a
+    '';
 
     # ── Greeting ────────────────────────────────────────────────
     interactiveShellInit = ''
       set -g fish_greeting
       fastfetch
 
-      # Atuin — historia sincronizada (desactivado dentro de nix-shell)
       if not set -q IN_NIX_SHELL
         atuin init fish | source
       end
 
-      # Kitty shell integration
       if set -q KITTY_INSTALLATION_DIR
         set --global KITTY_SHELL_INTEGRATION no-rc
         source "$KITTY_INSTALLATION_DIR/shell-integration/fish/vendor_conf.d/kitty-shell-integration.fish"
@@ -30,34 +60,27 @@
       end
     '';
 
-    # ── Variables ───────────────────────────────────────────────
-    shellInit = ''
-      set -gx DIRENV_LOG_FORMAT ""
-      set -gx DIRENV_LOG_LEVEL off
-    '';
-
     # ── Aliases ─────────────────────────────────────────────────
     shellAliases = {
-      # Nix
-      nrb   = "sudo nixos-rebuild switch --flake /etc/nixos#nixos";
-      nrbt  = "sudo nixos-rebuild test --flake /etc/nixos#nixos";
-      ngen  = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
-      ngc   = "sudo nix-collect-garbage -d";
-      nupd  = "nix flake update /etc/nixos";
-
-      # Herramientas
-      ls    = "ls --color=auto";
-      ll    = "ls -la --color=auto";
-      cat   = "bat";
-      grep  = "grep --color=auto";
-      vim   = "nvim";
-      fm    = "Y";
+      nrb  = "sudo nixos-rebuild switch --flake ~/nixos_config#nixos";
+      nrbt = "sudo nixos-rebuild test --flake ~/nixos_config#nixos";
+      ngen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
+      ngc  = "sudo nix-collect-garbage -d";
+      nupd = "nix flake update ~/nixos_config";
+      ls   = "ls --color=auto";
+      ll   = "ls -la --color=auto";
+      cat  = "bat";
+      grep = "grep --color=auto";
+      vim  = "nvim";
+      fm   = "Y";
+      please = "sudo";
+      FUCKING = "sudo";
+      SYBAU = "sudo";
     };
 
-    # ── Funciones (migradas de static/fish/functions/) ───────────
+    # ── Funciones ───────────────────────────────────────────────
     functions = {
 
-      # Prompt personalizado
       fish_prompt = {
         body = ''
           set -l last_status $status
@@ -66,21 +89,42 @@
           if test $last_status -ne 0
             set status_indicator (set_color red)"✗ "
           else
-            set status_indicator (set_color green)"✓ "
+            set status_indicator (set_color 00ff41)"✓ "
           end
 
-          echo -n (set_color cyan)"[" (set_color yellow)$USER (set_color normal)"@" (set_color magenta)(hostname) (set_color cyan)"]" (set_color blue)" $cwd " $status_indicator (set_color normal)
+          echo -n (set_color 00cc33)"[ "(set_color 39ff14)$USER(set_color c8ffc8)" @ "(set_color 00ff41)(hostname)(set_color 00cc33)" ] "(set_color 7abf7a)"$cwd "(set_color normal)$status_indicator(set_color normal)
           echo ""
-          echo -n (set_color cyan)"❯ " (set_color normal)
+          echo -n (set_color 00ff41)"❯ "(set_color normal)
         '';
       };
 
-      # Reloj en terminal
-      clock = {
-        body = "clock-rs -t -s";
+      clock       = { body = "clock-rs -t -s"; };
+      icat        = { body = "kitty +kitten icat $argv"; };
+      Svim        = { body = "sudo -E nvim $argv"; };
+      Power_Get   = { body = "powerprofilesctl get"; };
+      Temp        = { body = "sensors | grep 'Core\\|Tdie'"; };
+      mnt-space   = { body = "df -h | grep -v tmpfs | grep -v udev"; };
+
+      CAVA = { body = "kitty --class cava-term -e cava &"; };
+
+      Cmatrix = {
+        body = ''
+          kitty --title "Matrix" fish -c "
+              kitty @ set-background-opacity 1.0;
+              cmatrix;
+              kitty @ set-background-opacity 0.75
+          "
+        '';
       };
 
-      # Montar dispositivo
+      Power_Performance = { body = "sudo powerprofilesctl set performance && echo 'Modo: Performance'"; };
+      Power_Balanced    = { body = "sudo powerprofilesctl set balanced && echo 'Modo: Balanced'"; };
+      Power_Saver       = { body = "sudo powerprofilesctl set power-saver && echo 'Modo: Power Saver'"; };
+
+      Nix_Rebuild_System    = { body = "sudo nixos-rebuild switch --flake ~/nixos_config#nixos"; };
+      Nix_Test_Configuration = { body = "sudo nixos-rebuild test --flake ~/nixos_config#nixos --no-reexec"; };
+      Nix_See_Generations   = { body = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system"; };
+
       mnt = {
         body = ''
           if test (count $argv) -lt 2
@@ -92,7 +136,6 @@
         '';
       };
 
-      # Desmontar
       umnt = {
         body = ''
           if test (count $argv) -lt 1
@@ -104,63 +147,6 @@
         '';
       };
 
-      # Ver espacio de montajes
-      mnt-space = {
-        body = "df -h | grep -v tmpfs | grep -v udev";
-      };
-
-      # Abrir imagen en kitty
-      icat = {
-        body = "kitty +kitten icat $argv";
-      };
-
-      # Rebuild NixOS
-      Nix_Rebuild_System = {
-        body = "sudo nixos-rebuild switch --flake ~/nixos_config#nixos";
-      };
-
-      Nix_Test_Configuration = {
-        body = "sudo nixos-rebuild test --flake ~/nixos_config#nixos --no-reexec";
-      };
-
-      # Ver generaciones
-      Nix_See_Generations = {
-        body = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
-      };
-
-      # Perfiles de energía
-      Power_Performance = {
-        body = "sudo powerprofilesctl set performance && echo 'Modo: Performance'";
-      };
-
-      Power_Balanced = {
-        body = "sudo powerprofilesctl set balanced && echo 'Modo: Balanced'";
-      };
-
-      Power_Saver = {
-        body = "sudo powerprofilesctl set power-saver && echo 'Modo: Power Saver'";
-      };
-
-      Power_Get = {
-        body = "powerprofilesctl get";
-      };
-
-      # Temperatura CPU
-      Temp = {
-        body = "sensors | grep 'Core\\|Tdie'";
-      };
-
-      # CAVA en terminal
-      CAVA = {
-        body = "kitty --class cava-term -e cava &";
-      };
-
-      # Svim — sudo nvim
-      Svim = {
-        body = "sudo -E nvim $argv";
-      };
-
-      # Compilar C rápido
       CRun = {
         body = ''
           if test (count $argv) -lt 1
@@ -176,42 +162,18 @@
       Y = {
         body = ''
           set tmp (mktemp -t "yazi-cwd.XXXXXX")
-
           yazi $argv --cwd-file="$tmp"
-
           if test -f "$tmp"
-              set cwd (cat "$tmp")
-
-              if test -n "$cwd"; and test "$cwd" != "$PWD"
-                  cd "$cwd"
-              end
+            set cwd (cat "$tmp")
+            if test -n "$cwd"; and test "$cwd" != "$PWD"
+              cd "$cwd"
+            end
           end
-
           rm -f "$tmp"
-        '';
-      };
-
-      Cmatrix = {
-        body =  ''
-          kitty --title "Matrix" fish -c "
-              kitty @ set-background-opacity 1.0;
-              cmatrix;
-              kitty @ set-background-opacity 0.75
-          "
         '';
       };
     };
 
-    # ── Colores Dracula ──────────────────────────────────────────
-    # (Equivalente a static/fish/conf.d/fish_frozen_theme.fish)
-    plugins = [
-      # Si quieres instalar plugins via fisherman/fisher:
-      # { name = "z"; src = pkgs.fishPlugins.z.src; }
-    ];
+    plugins = [];
   };
-
-  # ── Colores del tema (via home.file para fish_variables) ───────
-  # Los colores Dracula se configuran directamente en interactiveShellInit
-  # o puedes usar xdg.configFile para copiar fish_variables:
-  xdg.configFile."fish/fish_variables".source = ../../static/fish/fish_variables;
 }
