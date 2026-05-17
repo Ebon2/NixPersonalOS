@@ -88,9 +88,9 @@
         "EDITOR,nvim"
         "TERMINAL,kitty"
         "NIXOS_OZONE_WL,1"
-        "XCURSOR_THEME,Qogir-dark"
+        "XCURSOR_THEME,catppuccin-mocha-dark-cursors"
         "XCURSOR_SIZE,24"
-        "HYPRCURSOR_THEME,Qogir-dark"
+        "HYPRCURSOR_THEME,catppuccin-mocha-dark-cursors"
         "HYPRCURSOR_SIZE,24"
         "GTK_THEME,catppuccin-mocha-green-standard"
       ];
