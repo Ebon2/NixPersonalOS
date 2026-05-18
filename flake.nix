@@ -27,8 +27,8 @@
         ./hosts/nixos/default.nix
         ./hosts/nixos/hardware-configuration.nix
 
-        disko.nixosModules.disko
-        ./hosts/nixos/disko.nix
+        #disko.nixosModules.disko
+        #./hosts/nixos/disko.nix
         
         home-manager.nixosModules.home-manager
         {

@@ -12,9 +12,15 @@
   dualBoot = false;
 
   # Solo relevante si dualBoot = true.
-  # Partición EFI de Windows que se montará en /boot/efi
+  # Partición EFI de Windows que se montará en /boot
   # Ejemplo: "/dev/nvme0n1p1"
   efiPartition = "/dev/nvme0n1p1";
+
+  # Solo relevante si dualBoot = true.
+  # Partición LIBRE que creaste desde Windows para NixOS.
+  # Disko la borrará y creará swap + root dentro de ella.
+  # Ejemplo: "/dev/nvme0n1p5"
+  nixPartition = "/dev/nvme0n1p5";
 
   # Tamaño del swap. Tu script lo sobreescribirá con el valor correcto.
   # Formato disko: "4G", "8G", "16G", etc.
