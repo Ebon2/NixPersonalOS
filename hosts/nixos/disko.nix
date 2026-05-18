@@ -1,31 +1,23 @@
-# ─────────────────────────────────────────────────────────────────
-# hosts/nixos/disko.nix
-#
-# Recibe `diskConfig` vía specialArgs (inyectado desde flake.nix).
-# Lee disk.nix y construye el layout GPT automáticamente.
-#
-# Modos:
-#   dualBoot = false → ESP (512M) + swap + root (resto del disco)
-#   dualBoot = true  → solo swap + root; EFI de Windows se monta aparte
-# ─────────────────────────────────────────────────────────────────
 { diskConfig, lib, ... }:
-
 let
   inherit (diskConfig) disk dualBoot efiPartition swapSize;
-  # nixPartition puede no existir en configs antiguas → fallback ""
-  nixPartition = diskConfig.nixPartition or "";
+
+  # Modo dualBoot obliga a definir las particiones de root y swap
+  rootPartition = diskConfig.rootPartition or
+    (throw "En modo dualBoot debes definir 'rootPartition' (ej. /dev/nvme0n1p5)");
+  swapPartition = diskConfig.swapPartition or
+    (throw "En modo dualBoot debes definir 'swapPartition' (ej. /dev/nvme0n1p6)");
 in
 {
-  disko.devices =
-
-    # ════════════════════════════════════════════════════════════════
-    # MODO LIMPIO — disko controla el disco completo
-    # Crea: ESP (512M) + swap + root (resto)
-    # ════════════════════════════════════════════════════════════════
-    lib.mkIf (!dualBoot) {
+  disko.devices = lib.mkMerge [
+    # ═══════════════════════════════════════════════
+    # MODO LIMPIO (dualBoot = false)
+    # Disko gestiona TODO el disco: crea ESP, swap y root
+    # ═══════════════════════════════════════════════
+    (lib.mkIf (!dualBoot) {
       disk.main = {
         device = disk;
-        type   = "disk";
+        type = "disk";
         content = {
           type = "gpt";
           partitions = {
@@ -33,83 +25,70 @@ in
               size = "512M";
               type = "EF00";
               content = {
-                type         = "filesystem";
-                format       = "vfat";
-                mountpoint   = "/boot";
+                type = "filesystem";
+                format = "vfat";
+                mountpoint = "/boot";
                 mountOptions = [ "umask=0077" ];
               };
             };
             swap = {
-              size    = swapSize;
+              size = swapSize;
               content = {
-                type          = "swap";
+                type = "swap";
                 discardPolicy = "both";
-                resumeDevice  = true;
+                resumeDevice = true;
               };
             };
             root = {
-              size    = "100%";
+              size = "100%";
               content = {
-                type         = "filesystem";
-                format       = "ext4";
-                mountpoint   = "/";
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/";
                 mountOptions = [ "noatime" ];
               };
             };
           };
         };
       };
-    }
+    })
 
-    //
-
-    # ════════════════════════════════════════════════════════════════
-    # MODO DUAL BOOT — disko opera SOLO sobre nixPartition
-    # La partición EFI de Windows se monta pero no se toca.
-    # nixPartition se trata como un "disco" virtual: disko la
-    # reformatea internamente con LVM o simplemente la divide en
-    # swap + root usando su tipo "nodev" + contenido directo.
-    # ════════════════════════════════════════════════════════════════
+    # ═══════════════════════════════════════════════
+    # MODO DUAL BOOT (dualBoot = true)
+    # Solo formatea las particiones existentes, sin tocar la tabla GPT
+    # ═══════════════════════════════════════════════
     (lib.mkIf dualBoot {
-      disk.nixos = {
-        # Apuntamos directamente a la partición libre, no al disco.
-        # disko la tratará como superficie en blanco y creará
-        # una tabla de particiones dentro de ella con swap + root.
-        device = nixPartition;
-        type   = "disk";
+      # Partición root como dispositivo único (ext4)
+      root = {
+        type = "disk";          # Se trata como un disco entero a formatear
+        device = rootPartition; # /dev/nvme0n1p5
         content = {
-          type = "gpt";
-          partitions = {
-            swap = {
-              size    = swapSize;
-              content = {
-                type          = "swap";
-                discardPolicy = "both";
-                resumeDevice  = true;
-              };
-            };
-            root = {
-              size    = "100%";
-              content = {
-                type         = "filesystem";
-                format       = "ext4";
-                mountpoint   = "/";
-                mountOptions = [ "noatime" ];
-              };
-            };
-          };
+          type = "filesystem";
+          format = "ext4";
+          mountpoint = "/";
+          mountOptions = [ "noatime" ];
         };
       };
-    });
+      # Partición swap como dispositivo único
+      swap = {
+        type = "disk";
+        device = swapPartition; # /dev/nvme0n1p6
+        content = {
+          type = "swap";
+          discardPolicy = "both";
+          resumeDevice = true;
+        };
+      };
+    })
+  ];
 
-  # ── Dual boot: declarar el mount de la EFI de Windows en /boot ───
-  # disko NO formatea ni toca esta partición.
-  # NixOS la monta en /boot para que systemd-boot pueda escribir
-  # las entradas del bootloader junto a las de Windows.
+  # ═══════════════════════════════════════════════
+  # EFI de Windows: solo se monta, NUNCA se formatea
+  # ═══════════════════════════════════════════════
   fileSystems = lib.mkIf dualBoot {
     "/boot" = {
-      device  = efiPartition;
-      fsType  = "vfat";
+      device = efiPartition;  # La EFI que ya existe (p.ej. /dev/nvme0n1p1)
+      fsType = "vfat";
       options = [ "umask=0077" ];
     };
   };
