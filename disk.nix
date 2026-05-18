@@ -20,9 +20,10 @@
   # Partición LIBRE que creaste desde Windows para NixOS.
   # Disko la borrará y creará swap + root dentro de ella.
   # Ejemplo: "/dev/nvme0n1p5"
-  nixPartition = "/dev/nvme0n1p5";
+  rootPartition = "/dev/nvme0n1p5";
+  swampPartition = "/dev/nvme0n1p6";
 
   # Tamaño del swap. Tu script lo sobreescribirá con el valor correcto.
   # Formato disko: "4G", "8G", "16G", etc.
-  swapSize = "8G";
+  swapSize = "20G";
 }
