@@ -4,9 +4,9 @@ let
 
   # Modo dualBoot obliga a definir las particiones de root y swap
   rootPartition = diskConfig.rootPartition or
-    (throw "En modo dualBoot debes definir 'rootPartition' (ej. /dev/nvme0n1p5)");
+    (throw "En modo dualBoot debes definir 'rootPartition' (ej. /dev/nvme0n1p6)");
   swapPartition = diskConfig.swapPartition or
-    (throw "En modo dualBoot debes definir 'swapPartition' (ej. /dev/nvme0n1p6)");
+    (throw "En modo dualBoot debes definir 'swapPartition' (ej. /dev/nvme0n1p5)");
 in
 {
   disko.devices = lib.mkMerge [
@@ -59,7 +59,7 @@ in
     # ═══════════════════════════════════════════════
     (lib.mkIf dualBoot {
       # Partición root como dispositivo único (ext4)
-      root = {
+      disk."nixos-root" = {
         type = "disk";          # Se trata como un disco entero a formatear
         device = rootPartition; # /dev/nvme0n1p5
         content = {
@@ -70,7 +70,7 @@ in
         };
       };
       # Partición swap como dispositivo único
-      swap = {
+      disk."nixos-swap" = {
         type = "disk";
         device = swapPartition; # /dev/nvme0n1p6
         content = {

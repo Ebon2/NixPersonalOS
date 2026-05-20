@@ -42,7 +42,7 @@
     fd
     ripgrep
     fzf
-    zoxide
+    eza
     thunar
     broot
     duf

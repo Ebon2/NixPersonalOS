@@ -43,6 +43,7 @@
         "hypridle"
         "wl-paste --watch cliphist store"
         "awww-daemon"
+        "awww img ~/nixos_config/static/hypr/wp.jpg toy"
         "sleep 1.5 && awww img ~/.config/hypr/wp.png --transition-type grow --transition-pos 0.5,0.5 --transition-duration 2 --transition-fps 60"
         "nm-applet --indicator"
         "blueman-applet"
@@ -82,7 +83,7 @@
         "GDK_BACKEND,wayland,x11"
         "MOZ_ENABLE_WAYLAND,1"
         "MOZ_DBUS_REMOTE,1"
-        "IDEA_USE_X11,1"
+        #"IDEA_USE_X11,1"
         "_JAVA_AWT_WM_NONREPARENTING,1"
         "ELECTRON_OZONE_PLATFORM_HINT,wayland"
         "EDITOR,nvim"
@@ -123,7 +124,5 @@
     "hypr/hyprpaper.conf".source = ../../static/hypr/hyprpaper.conf;
     "hypr/hyprlock.conf".source  = ../../static/hypr/hyprlock.conf;
     "hypr/hypridle.conf".source  = ../../static/hypr/hypridle.conf;
-    #"hypr/wp.png".source         = ../../static/hypr/wp.png;
-    "hypr/wp.jpg".source         = ../../static/hypr/wp.jpg;
   };
 }

@@ -103,6 +103,11 @@
     source    = ../../static/wlogout;
     recursive = true;
   };
+  
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+  };
 
   # ── Waypaper ───────────────────────────────────────────────────
   xdg.configFile."waypaper/config.ini".source = ../../static/waypaper/config.ini;

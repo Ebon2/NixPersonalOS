@@ -51,6 +51,7 @@
 
       if not set -q IN_NIX_SHELL
         atuin init fish | source
+        zoxide init fish | source
       end
 
       if set -q KITTY_INSTALLATION_DIR
@@ -62,20 +63,21 @@
 
     # ── Aliases ─────────────────────────────────────────────────
     shellAliases = {
-      nrb  = "sudo nixos-rebuild switch --flake ~/nixos_config#nixos";
-      nrbt = "sudo nixos-rebuild test --flake ~/nixos_config#nixos";
-      ngen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
-      ngc  = "sudo nix-collect-garbage -d";
-      nupd = "nix flake update ~/nixos_config";
-      ls   = "ls --color=auto";
-      ll   = "ls -la --color=auto";
-      cat  = "bat";
-      grep = "grep --color=auto";
-      vim  = "nvim";
-      fm   = "Y";
-      please = "sudo";
+      nrb     = "sudo nixos-rebuild switch --flake ~/nixos_config#nixos";
+      nrbt    = "sudo nixos-rebuild test --flake ~/nixos_config#nixos";
+      ngen    = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
+      ngc     = "sudo nix-collect-garbage -d";
+      nupd    = "nix flake update ~/nixos_config";
+      ls      = "ls --color=auto";
+      ll      = "ls -la --color=auto";
+      cat     = "bat";
+      Server  = "ssh angel@rojas-Server";
+      grep    = "grep --color=auto";
+      vim     = "nvim";
+      fm      = "Y";
+      please  = "sudo";
       FUCKING = "sudo";
-      SYBAU = "sudo";
+      SYBAU   = "sudo";
     };
 
     # ── Funciones ───────────────────────────────────────────────
@@ -105,7 +107,7 @@
       Temp        = { body = "sensors | grep 'Core\\|Tdie'"; };
       mnt-space   = { body = "df -h | grep -v tmpfs | grep -v udev"; };
 
-      CAVA = { body = "kitty --class cava-term -e cava &"; };
+      Cava = { body = "kitty --class cava-term -e cava &"; };
 
       Cmatrix = {
         body = ''
@@ -124,6 +126,93 @@
       Nix_Rebuild_System    = { body = "sudo nixos-rebuild switch --flake ~/nixos_config#nixos"; };
       Nix_Test_Configuration = { body = "sudo nixos-rebuild test --flake ~/nixos_config#nixos --no-reexec"; };
       Nix_See_Generations   = { body = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system"; };
+      Nix_Init_Labs = {
+        body = ''
+          set languajes jvm cpp python network reversing debug web go rust
+
+          set flake_path ~/labs
+          
+          for l in $languajes
+              nix develop "$flake_path#$l" \
+                  --profile $flake_path/.profiles/$l \
+                  --command echo "The $l laboratory as ready to use"
+          end
+        '';
+      };
+      Nix_Open_Lab = {
+        body = ''
+          set name NONE
+          if set -q argv[1]
+              set name (string lower $argv[1])
+          end
+          
+          set program code 
+          if set -q argv[2] 
+              set program $argv[2]
+          end
+          
+          set shell_path ~/labs/.profiles
+          set lab_path ~/labs
+
+          set OPEN_TERMINAL none 0 terminal
+          
+          set JAVA java jvm kt
+          set CPP cpp c++ c
+          set PY py python
+          set NW nw network
+          set RE re reversing
+          set DB db debug
+          set WEB web
+          set GO go
+          set RS rs rust
+          
+          switch $name
+              case $JAVA
+                  set languaje jvm
+              case $CPP
+                  set languaje cpp
+              case $PY
+                  set languaje python
+              case $NW
+                  set languaje network
+              case $RE
+                  set languaje reversing
+              case $DB
+                  set languaje debug
+              case $WEB
+                  set languaje web
+              case $GO
+                  set languaje go
+              case $RS
+                  set languaje rust
+
+              case '*'
+                  echo "Comando invalido"
+                  echo "===== Posibles comandos ===== "
+                  echo " - JVM $JAVA"
+                  echo " - CPP $CPP"
+                  echo " - PY $PY"
+                  echo " - NETWORK $NW"
+                  echo " - REVERSING $RE"
+                  echo " - DEBUG $DB"
+                  echo " - WEB $WEB"
+                  echo " - GO $GO"
+                  echo " - RUST $RS"
+                  return 1
+          end
+          
+          set base_command nix develop "$lab_path#$languaje" \
+              --profile "$shell_path/$languaje"
+
+          switch (string lower $program)
+              case $OPEN_TERMINAL
+                  $base_command
+              case '*'
+                  $base_command -c $program "$lab_path/$languaje"
+                  exit
+          end
+        '';
+      };
 
       mnt = {
         body = ''
@@ -172,8 +261,60 @@
           rm -f "$tmp"
         '';
       };
+
+      No_Lock = {
+        body = ''
+          echo "Bloqueando suspensión por inactividad..."
+            systemd-inhibit --what=idle:sleep \
+                --who="No Lock" \
+                --why="Suspensión temporal desactivada por el usuario" \
+                sleep infinity &
+            set inhibitor_pid $last_pid
+            echo ""
+            echo "Suspensión congelada. Escribe 'q' para restaurar."
+            while true
+                read -l input
+                if test "$input" = q
+                    break
+                end
+            end
+            echo "Restaurando comportamiento normal..."
+            kill $inhibitor_pid
+            echo "Listo."
+        '';
+      };
     };
 
-    plugins = [];
+    plugins = [
+      {
+        name = "fzf";
+        src = pkgs.fishPlugins.fzf-fish.src;
+      }
+
+      {
+        name = "autopair";
+        src = pkgs.fishPlugins.autopair.src;
+      }
+
+      {
+        name = "done";
+        src = pkgs.fishPlugins.done.src;
+      }
+
+      {
+        name = "sponge";
+        src = pkgs.fishPlugins.sponge.src;
+      }
+
+      {
+        name = "puffer";
+        src = pkgs.fishPlugins.puffer.src;
+      }
+
+      {
+        name = "colored-man-pages";
+        src = pkgs.fishPlugins.colored-man-pages.src;
+      }
+    ];
   };
 }
