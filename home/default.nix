@@ -30,6 +30,7 @@
     ./programs/neovim.nix
     ./programs/git.nix
     #./programs/thunar.nix
+    ./programs/scripts.nix
     ./programs/misc.nix
     ./desktop/hyprland.nix
     ./desktop/waybar.nix

@@ -123,9 +123,9 @@
       Power_Balanced    = { body = "sudo powerprofilesctl set balanced && echo 'Modo: Balanced'"; };
       Power_Saver       = { body = "sudo powerprofilesctl set power-saver && echo 'Modo: Power Saver'"; };
 
-      Nix_Rebuild_System    = { body = "sudo nixos-rebuild switch --flake ~/nixos_config#nixos"; };
-      Nix_Test_Configuration = { body = "sudo nixos-rebuild test --flake ~/nixos_config#nixos --no-reexec"; };
-      Nix_See_Generations   = { body = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system"; };
+      #Nix_Rebuild_System    = { body = "sudo nixos-rebuild switch --flake ~/nixos_config#nixos"; };
+      #Nix_Test_Configuration = { body = "sudo nixos-rebuild test --flake ~/nixos_config#nixos --no-reexec"; };
+      #Nix_See_Generations   = { body = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system"; };
       Nix_Init_Labs = {
         body = ''
           set languajes jvm cpp python network reversing debug web go rust
@@ -285,36 +285,13 @@
       };
     };
 
-    plugins = [
-      {
-        name = "fzf";
-        src = pkgs.fishPlugins.fzf-fish.src;
-      }
-
-      {
-        name = "autopair";
-        src = pkgs.fishPlugins.autopair.src;
-      }
-
-      {
-        name = "done";
-        src = pkgs.fishPlugins.done.src;
-      }
-
-      {
-        name = "sponge";
-        src = pkgs.fishPlugins.sponge.src;
-      }
-
-      {
-        name = "puffer";
-        src = pkgs.fishPlugins.puffer.src;
-      }
-
-      {
-        name = "colored-man-pages";
-        src = pkgs.fishPlugins.colored-man-pages.src;
-      }
+    plugins = with pkgs.fishPlugins; [
+      { name = "fzf";               src = fzf-fish.src; }
+      { name = "done";              src = done.src; }
+      { name = "sponge";            src = sponge.src; }
+      { name = "puffer";            src = puffer.src; }
+      { name = "autopair";          src = autopair.src; }
+      { name = "colored-man-pages"; src = colored-man-pages.src; }
     ];
   };
 }
