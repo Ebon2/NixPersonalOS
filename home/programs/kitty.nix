@@ -14,13 +14,14 @@
       size = 12;
     };
 
-  settings = {
-    background_opacity   = "0.6";
-    shell_integration    = "no-rc";
-    cursor_text_color    = "background";
-    dynamic_background_opacity = true;
-    allow_remote_control = "yes";
-  };
+    settings = {
+      background_opacity   = "0.6";
+      shell_integration    = "no-rc";
+      cursor_text_color    = "background";
+      dynamic_background_opacity = true;
+      allow_remote_control = "yes";
+    };
+    
     # Colores Dracula
     extraConfig = ''
       include ~/.config/kitty/current-theme.conf

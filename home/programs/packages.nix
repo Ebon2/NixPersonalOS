@@ -85,7 +85,7 @@
     gimp
 
     # ── Comunicación ─────────────────────────────────────────────
-    discord
+    vesktop
     zapzap          # WhatsApp
     spotify
 

@@ -22,7 +22,9 @@
   in {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit inputs userConfig diskConfig; };   # ← disponible en todos los módulos NixOS
+
+      specialArgs = { inherit inputs userConfig diskConfig; };
+      
       modules = [
         ./hosts/nixos/default.nix
         ./hosts/nixos/hardware-configuration.nix
@@ -36,8 +38,8 @@
             backupFileExtension  = "bak-$(date +%Y%m%d%H%M%S)";
             useGlobalPkgs        = true;
             useUserPackages      = true;
-            extraSpecialArgs     = { inherit inputs userConfig; };  # ← disponible en HM
-            users.${userConfig.username} = import ./home/default.nix;  # ← username dinámico
+            extraSpecialArgs     = { inherit inputs userConfig; };
+            users.${userConfig.username} = import ./home/default.nix; 
           };
         }
       ];

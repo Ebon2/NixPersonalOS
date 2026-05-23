@@ -34,5 +34,5 @@ in {
         kitty @ set-background-opacity 0.75
       "
     '')
-  ]
+  ];
 }
