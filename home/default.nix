@@ -32,10 +32,15 @@
     #./programs/thunar.nix
     ./programs/scripts.nix
     ./programs/misc.nix
+    ./programs/mangohud.nix
+    ./programs/zen.nix
     ./desktop/hyprland.nix
     ./desktop/waybar.nix
     ./desktop/rofi.nix
     ./desktop/theme.nix
+    ./system/services.nix
+    ./system/targets.nix
+    #inputs.zen-browser.homeModules.twilight
   ];
 
   # ── Identidad ──────────────────────────────────────────────────

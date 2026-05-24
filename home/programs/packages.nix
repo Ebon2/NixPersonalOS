@@ -90,7 +90,6 @@
     spotify
 
     # ── Gaming ───────────────────────────────────────────────────
-    mangohud
     prismlauncher   # Minecraft
 
     # ── Navegadores ──────────────────────────────────────────────
