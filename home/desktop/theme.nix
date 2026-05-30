@@ -25,7 +25,7 @@
     cursorTheme = {
       name    = "catppuccin-mocha-dark-cursors";
       package = pkgs.catppuccin-cursors.mochaDark;
-      size    = 24;
+      size    = 34;
     };
 
     font = {
@@ -48,7 +48,7 @@
   home.pointerCursor = {
     name    = "catppucin-mocha-dark-cursors";
     package = pkgs.catppuccin-cursors.mochaDark;
-    size    = 24;
+    size    = 34;
     gtk.enable = true;
     x11.enable = true;
     hyprcursor.enable = true;

@@ -28,4 +28,4 @@ done < "$config_file"
 keybinds="${keybinds%$'\n'}"
 
 sleep 0.2
-rofi -theme "~/.config/rofi/themes/transparent.rasi" -dmenu -i -markup -eh 2 -replace -p "Keybinds" <<< "$keybinds"
+rofi -theme "~/.config/rofi/themes/catppuccin.rasi" -dmenu -i -markup -eh 2 -replace -p "Keybinds" <<< "$keybinds"

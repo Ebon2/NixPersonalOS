@@ -103,28 +103,14 @@
       clock       = { body = "clock-rs -t -s"; };
       icat        = { body = "kitty +kitten icat $argv"; };
       Svim        = { body = "sudo -E nvim $argv"; };
-      Power_Get   = { body = "powerprofilesctl get"; };
       Temp        = { body = "sensors | grep 'Core\\|Tdie'"; };
       mnt-space   = { body = "df -h | grep -v tmpfs | grep -v udev"; };
 
       Cava = { body = "kitty --class cava-term -e cava &"; };
 
-      Cmatrix = {
-        body = ''
-          kitty --title "Matrix" fish -c "
-              kitty @ set-background-opacity 1.0;
-              cmatrix;
-              kitty @ set-background-opacity 0.75
-          "
-        '';
-      };
-
-      Power_Performance = { body = "sudo powerprofilesctl set performance && echo 'Modo: Performance'"; };
-      Power_Balanced    = { body = "sudo powerprofilesctl set balanced && echo 'Modo: Balanced'"; };
-      Power_Saver       = { body = "sudo powerprofilesctl set power-saver && echo 'Modo: Power Saver'"; };
-
       #Nix_Rebuild_System    = { body = "sudo nixos-rebuild switch --flake ~/nixos_config#nixos"; };
       #Nix_Test_Configuration = { body = "sudo nixos-rebuild test --flake ~/nixos_config#nixos --no-reexec"; };
+      
       #Nix_See_Generations   = { body = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system"; };
       Nix_Init_Labs = {
         body = ''
@@ -139,6 +125,7 @@
           end
         '';
       };
+      
       Nix_Open_Lab = {
         body = ''
           set name NONE

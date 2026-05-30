@@ -69,7 +69,7 @@
     enable = true;
     remotePlay.openFirewall = true;
     extraCompatPackages = with pkgs; [ proton-ge-bin ];
-    gamescopeSession.enable = false;
+    gamescopeSession.enable = true;
 
     package = pkgs.steam.override {
       extraLibraries = pkgs: with pkgs; [ libgcc ];

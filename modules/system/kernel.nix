@@ -17,7 +17,7 @@
   # ===== FALLBACK: Zen 6.12 (última rama estable compatible con VBox) =====
   # Si el patch de 6.19 da problemas, comenta la línea de arriba
   # y descomenta esta:
-   boot.kernelPackages = pkgs.linuxPackages_6_12;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   # Otros kernels disponibles:
   # pkgs.linuxPackages_latest     # Última versión estable
@@ -26,12 +26,11 @@
 
   # Módulos del kernel a cargar
   boot.kernelModules = [
-    # Agrega módulos específicos aquí si los necesitas
+    "zenergy"
   ];
 
   boot.extraModulePackages = with config.boot.kernelPackages; [
-    # Paquetes extra del kernel (como drivers adicionales)
-    # Ejemplo: cuando agregues drivers NVIDIA, AMD, etc.
+    zenergy
   ];
 
   # Parámetros del kernel
@@ -46,4 +45,7 @@
     # Seguridad
     "kernel.dmesg_restrict" = true;
   };
+
+  boot.blacklistedKernelModules = [ "k10temp" ];
 }
+

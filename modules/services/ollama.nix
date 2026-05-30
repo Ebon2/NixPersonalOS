@@ -20,7 +20,7 @@
       OLLAMA_FLASH_ATTENTION   = "1";     # reduce uso de memoria
       OLLAMA_KEEP_ALIVE        = "5m";    # descarga el modelo tras 5 min inactivo
       OLLAMA_NUM_THREADS       = "14";    # hilos de CPU (ajusta a tus núcleos)
-      OLLAMA_KV_CACHE_TYPE     = "q8_0"; # caché cuantizado → menos RAM en CPU
+      OLLAMA_KV_CACHE_TYPE     = "q8_0";  # caché cuantizado → menos RAM en CPU
     };
   };
 

@@ -38,17 +38,17 @@
   # Paquetes adicionales de KDE que podrías querer
   environment.systemPackages = with pkgs; [
     # Aplicaciones KDE
-    kdePackages.kate
+    #kdePackages.kate
     #kdePackages.konsole
     kdePackages.dolphin
-    kdePackages.ark  # Gestor de archivos comprimidos
-    kdePackages.okular  # Visor de PDFs
+    #kdePackages.ark  # Gestor de archivos comprimidos
+    #kdePackages.okular  # Visor de PDFs
     kdePackages.gwenview  # Visor de imágenes
     kdePackages.spectacle  # Capturas de pantalla
     
     # Utilidades
     #kdePackages.kdeconnect-kde  # Integración con Android
-    kdePackages.partitionmanager  # Gestor de particiones
+    #kdePackages.partitionmanager  # Gestor de particiones
     #kdePackages.kcalc  # Calculadora
     
     # Agrega más según necesites

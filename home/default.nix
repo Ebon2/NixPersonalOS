@@ -29,8 +29,9 @@
     ./programs/kitty.nix
     ./programs/neovim.nix
     ./programs/git.nix
+    ./desktop/swayosd.nix
     #./programs/thunar.nix
-    ./programs/scripts.nix
+    ./files/scripts.nix
     ./programs/misc.nix
     ./programs/mangohud.nix
     ./programs/zen.nix
@@ -38,9 +39,7 @@
     ./desktop/waybar.nix
     ./desktop/rofi.nix
     ./desktop/theme.nix
-    ./system/services.nix
-    ./system/targets.nix
-    #inputs.zen-browser.homeModules.twilight
+    inputs.zen-browser.homeModules.twilight
   ];
 
   # ── Identidad ──────────────────────────────────────────────────

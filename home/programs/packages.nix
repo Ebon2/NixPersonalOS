@@ -16,6 +16,8 @@
     pciutils usbutils lshw inxi hwinfo dmidecode lsscsi smartmontools
     htop btop ntopng
     fastfetch
+    lm_sensors
+
 
     # ── AMD GPU ─────────────────────────────────────────────────
     amdgpu_top
@@ -31,8 +33,6 @@
     atuin
     tldr
     tmux
-    # kitty → configurado en programs/kitty.nix
-    # fish  → configurado en programs/fish.nix
 
     # ── Gestores de archivos ─────────────────────────────────────
     yazi
@@ -47,7 +47,6 @@
     broot
     duf
 
-    # thunar
     thunar
     thunar-archive-plugin
     thunar-media-tags-plugin
@@ -66,6 +65,7 @@
     jetbrains.clion
     jetbrains.pycharm
     bruno            # API client
+    cisco-packet-tracer_9
 
     # ── Multimedia ───────────────────────────────────────────────
     vlc
@@ -80,6 +80,7 @@
     obsidian
     zotero
     pgmodeler
+    localsend
 
     # ── Gráficos ─────────────────────────────────────────────────
     gimp
@@ -107,8 +108,5 @@
     figlet
     clock-rs
     home-manager
-
-    # ── KDE (si usas Plasma) ─────────────────────────────────────
-    kdePackages.kate
   ];
 }

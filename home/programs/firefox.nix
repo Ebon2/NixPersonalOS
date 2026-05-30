@@ -28,7 +28,7 @@
 {
   programs.firefox = {
     enable = true;
-    configPath = "$XDG_CONFIG_HOME/mozilla/firefox";
+    configPath = "$HOME/.config/mozilla/firefox";
 
     # ── Políticas (se aplican a nivel empresa, el usuario no puede cambiarlas) ──
     policies = {

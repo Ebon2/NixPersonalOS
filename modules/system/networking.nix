@@ -23,8 +23,8 @@
   networking.firewall = {
     enable = true;
     # Abre puertos específicos si los necesitas
-    # allowedTCPPorts = [ 80 443 ];
-    # allowedUDPPorts = [ ];
+     allowedTCPPorts = [ 53317 80 443 ];
+     allowedUDPPorts = [ 53317 ];
   };
 
   # DNS personalizado (opcional)

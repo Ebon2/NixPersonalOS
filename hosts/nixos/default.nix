@@ -26,7 +26,7 @@
     ../../modules/services/tailscale.nix
     ../../modules/services/system.nix
     ../../modules/services/cleaner.nix
-    ../../modules/services/virtualbox.nix
+    #../../modules/services/virtualbox.nix
     ../../modules/services/ollama.nix
 
     # Paquetes del sistema (lo que NO puede ir en home-manager)

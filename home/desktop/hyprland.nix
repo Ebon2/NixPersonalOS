@@ -17,7 +17,8 @@
     enable = true;
     xwayland.enable = true;
     systemd.enable = true;  # Integra con systemd --user (recomendado)
-
+    #configType = "lua";
+    
     settings = {
       # ── Monitor ───────────────────────────────────────────────
       # Descomenta y ajusta a tu monitor:
@@ -26,16 +27,17 @@
 
       # ── General ───────────────────────────────────────────────
       general = {
-        gaps_in            = 5;
-        gaps_out           = 10;
-        border_size        = 2;
+        gaps_in               = 5;
+        gaps_out              = 10;
+        border_size           = 2;
         "col.active_border"   = "rgba(00ff41ff) rgba(00cc33ff) 45deg";
         "col.inactive_border" = "rgba(1a331aaa)";
-        layout             = "dwindle";
+        layout                = "dwindle";
       };
 
       # ── Autostart ─────────────────────────────────────────────
       exec-once = [
+      #exec_once = [
         "~/.config/hypr/scripts/xdg.sh"
         "systemctl --user start polkit-gnome-authentication-agent-1 || /run/current-system/sw/libexec/polkit-gnome-authentication-agent-1"
         "dunst"
@@ -43,7 +45,7 @@
         "hypridle"
         "wl-paste --watch cliphist store"
         "awww-daemon"
-        "awww img ~/nixos_config/static/hypr/wp.jpg toy"
+        "awww img ~/nixos_config/static/hypr/wp.jpg"
         "sleep 1.5 && awww img ~/.config/hypr/wp.png --transition-type grow --transition-pos 0.5,0.5 --transition-duration 2 --transition-fps 60"
         "nm-applet --indicator"
         "blueman-applet"
@@ -68,7 +70,7 @@
 
       # ── Dwindle layout ────────────────────────────────────────
       dwindle = {
-        pseudotile    = true;
+      #  pseudotile    = true;
         preserve_split = true;
       };
 
@@ -119,8 +121,8 @@
   # ── Enlaza los archivos de static/hypr/ ───────────────────────
   # HM gestiona hyprland.conf; el resto lo enlazamos de static/
   xdg.configFile = {
-    "hypr/conf".source          = ../../static/hypr/conf;
-    "hypr/scripts".source       = ../../static/hypr/scripts;
+    "hypr/conf".source           = ../../static/hypr/conf;
+    "hypr/scripts".source        = ../../static/hypr/scripts;
     "hypr/hyprpaper.conf".source = ../../static/hypr/hyprpaper.conf;
     "hypr/hyprlock.conf".source  = ../../static/hypr/hyprlock.conf;
     "hypr/hypridle.conf".source  = ../../static/hypr/hypridle.conf;
